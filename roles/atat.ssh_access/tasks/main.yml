@@ -1,0 +1,39 @@
+---
+- name: Create SSH user
+  user:
+    user: "{{ item.key }}"
+    comment: "{{ item.value.full_name }}"
+    shell: /bin/bash
+    uid: "{{ item.value.uid }}"
+  with_dict: "{{ ssh_users }}"
+
+- name: Add SSH user key
+  authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ lookup('file', role_path + '/files/' + item.key + '.pub') }}"
+  with_dict: "{{ ssh_users }}"
+
+- name: Add users to sudo
+  block:
+    - name: Create sudoers file
+      copy:
+        dest: /etc/sudoers.d/99-ssh-users
+        content: ""
+        force: no
+        mode: 0440
+        owner: root
+        group: root
+    - name: Add sudoer entry
+      lineinfile:
+        path: /etc/sudoers.d/99-ssh-users
+        line: "{{ item.key }} ALL=(ALL) NOPASSWD:ALL"
+        state: present
+      with_dict: "{{ ssh_users }}"
+
+- name: Replace sshd config file (disable root login and such)
+  template:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,27 @@
+---
+atat_home: "/opt/atat"
+atat_bin: "{{ atat_home }}/bin"
+atat_config: "{{ atat_home }}/config"
+
+ssh_users:
+  brian.duggan:
+    full_name: 'Brian Duggan (PW)'
+    uid: 9891
+  dan.corrigan:
+    full_name: 'Dan Corrigan (PW)'
+    uid: 9892
+  devon.mackay:
+    full_name: 'Devon Mackay (DDS)'
+    uid: 9893
+  jason.garber:
+    full_name: 'Jason Garber (PW)'
+    uid: 9894
+  jordan.kasper:
+    full_name: 'Jordan Kasper (DDS)'
+    uid: 9895
+  kristian.tran:
+    full_name: 'Kristian Tran (DDS)' 
+    uid: 9896
+  richard.howard:
+    full_name: 'Richard Howard (PW)'
+    uid: 9897

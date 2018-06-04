@@ -1,0 +1,33 @@
+---
+- name: Ensure all base system packages are up to date
+  apt:
+    name: '*'
+    state: latest
+    update_cache: yes
+    force_apt_get: True
+
+- name: Install default utility packages
+  apt: name={{ item }} state=latest force_apt_get=True
+  with_items:
+  - "{{ default_packages }}"
+
+- name: Set the default command prompt
+  copy:
+    src: prompt.sh
+    dest: /etc/profile.d
+    owner: root
+    group: root
+
+- name: Add ATAT group
+  group:
+    gid: 9800
+    name: atat
+
+- name: Add ATAT user
+  user:
+    name: atat
+    shell: /bin/bash
+    comment: "ATAT user"
+    uid: 9889
+    groups: atat
+    home: "{{ atat_home }}"
