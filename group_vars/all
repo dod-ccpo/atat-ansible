@@ -4,6 +4,9 @@ atat_bin: "{{ atat_home }}/bin"
 atat_config: "{{ atat_home }}/config"
 
 ssh_users:
+  ansible:
+    full_name: 'Ansible User (SYS)'
+    uid: 9890
   brian.duggan:
     full_name: 'Brian Duggan (PW)'
     uid: 9891
