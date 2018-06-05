@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Carlos León
+  description: Docker
+  company: Container Solutions
+  license: MIT
+  min_ansible_version: 2.3
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  - name: Debian
+    versions:
+      - jessie
+  - name: Ubuntu
+    versions:
+      - xenial
+      #- zesty
+  galaxy_tags:
+    - docker
+    - swarm
+    - swarmkit
+    - dockerswarm
+    - dockerswarmkit
+
+dependencies: []

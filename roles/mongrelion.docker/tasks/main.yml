@@ -1,0 +1,17 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_items: "{{ ansible_os_family | lower }}.yml"
+  tags:
+    - always
+
+- include: preflight.yml
+
+- include: install.yml
+
+- include: configure.yml
+
+- name: ensure starts on system boot
+  systemd:
+    name: docker
+    enabled: yes
