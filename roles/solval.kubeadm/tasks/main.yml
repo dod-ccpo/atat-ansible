@@ -1,7 +1,0 @@
----
-
-- name: "Install Kubeadm"
-  include: "install-{{ ansible_os_family|lower }}.yml"
-
-- name: "Configure Kubeadm"
-  include: "configure.yml"
