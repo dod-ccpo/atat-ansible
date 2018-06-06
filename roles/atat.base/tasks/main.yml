@@ -31,3 +31,22 @@
     uid: 9889
     groups: atat
     home: "{{ atat_home }}"
+
+- name: Ensure default incoming policy is deny
+  ufw:
+    direction: incoming
+    policy: deny
+
+- name: Ensure default outgoing policy is allow
+  ufw:
+    direction: outgoing
+    policy: allow
+
+- name: Add ssh to the firewall
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable firewall
+  ufw:
+    state: enabled
