@@ -9,3 +9,11 @@
 - name: Include "{{kube_type_of_node}}" tasks
   include: "{{kube_type_of_node}}.yaml"
 
+- name: Add KUBELET_EXTRA_ARGS
+  lineinfile:
+    dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    line: 'Environment="KUBELET_EXTRA_ARGS={{kubelet_extra_args}}"'
+    regexp: '^Environment="KUBELET_EXTRA_ARGS'
+    insertafter: '\[Service\]'
+  notify: restart kubelet
+  when: kubelet_extra_args != ''
