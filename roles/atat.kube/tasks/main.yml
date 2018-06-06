@@ -1,0 +1,34 @@
+---
+# tasks file for atat.kube
+
+- name: Add common Kubernetes firewall rules
+  ufw:
+    rule: allow
+    proto: tcp
+    src: "{{ item.cidr }}"
+    port: "{{ item.port }}"
+  with_items:
+    - { cidr: '0.0.0.0/0', port: '10250' }
+    - { cidr: '0.0.0.0/0', port: '10255' }
+
+- name: Add master specific Kubernetes firewall rules
+  ufw:
+    rule: allow
+    proto: tcp
+    src: '{{ item.cidr }}'
+    port: '{{ item.port }}'
+  with_items:
+    - { cidr: '0.0.0.0/0', port: '6443' }
+    - { cidr: '0.0.0.0/0', port: '2379:2380' }
+    - { cidr: '0.0.0.0/0', port: '10251:10252' }
+  when: kube_node_type == 'master'
+
+- name: Add worker specific Kubernetes firewall rules
+  ufw:
+    rule: allow
+    proto: tcp
+    src: '{{ item.cidr }}'
+    port: "{{ item.port }}"
+  with_items:
+    - { cidr: '0.0.0.0/0', port: '30000:32767' }
+  when: kube_node_type == 'worker'
