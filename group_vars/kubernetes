@@ -1,0 +1,2 @@
+---
+kubelet_extra_args: '--anonymous-auth=false'

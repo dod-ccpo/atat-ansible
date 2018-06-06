@@ -1,0 +1,24 @@
+---
+- hosts: kubemasters
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install kubernetes
+      include_role:
+        name: grycap.kubernetes
+    - name: Finish kubernetes setup
+      include_role:
+        name: atat.kube
+- hosts: kubeworkers
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install kubernetes
+      include_role:
+        name: grycap.kubernetes
+      vars:
+        kube_server: 104.130.69.162
+        kube_type_of_node: wn
+    - name: Finish kubernetes setup
+      include_role:
+        name: atat.kube
