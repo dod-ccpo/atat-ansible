@@ -11,6 +11,17 @@
     - { cidr: '0.0.0.0/0', port: '10250' }
     - { cidr: '0.0.0.0/0', port: '10255' }
 
+- name: Add rule to allow encapsulated flannel network traffic from cluster members
+  ufw:
+    rule: allow
+    proto: udp
+    src: "{{ item.cidr }}"
+    port: "{{ item.port }}"
+  with_items:
+    - { cidr: '104.130.69.162/32', port: '8472' }
+    - { cidr: '104.130.69.163/32', port: '8472' }
+    - { cidr: '166.78.116.37/32', port: '8472' }
+
 - name: Add master specific Kubernetes firewall rules
   ufw:
     rule: allow
