@@ -1,7 +1,5 @@
 ---
-- hosts: all
-  become: yes
-  become_user: root
+- hosts: bootstrap_host
   gather_facts: False
   tasks:
     - name: install python 2
