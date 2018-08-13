@@ -7,9 +7,6 @@ ssh_users:
   ansible:
     full_name: 'Ansible User (SYS)'
     uid: 9890
-  brian.duggan:
-    full_name: 'Brian Duggan (PW)'
-    uid: 9891
   dan.corrigan:
     full_name: 'Dan Corrigan (PW)'
     uid: 9892
@@ -25,6 +22,9 @@ ssh_users:
   kristian.tran:
     full_name: 'Kristian Tran (DDS)' 
     uid: 9896
+  patrick.smith:
+    full_name: 'Patrick Smith (PW)'
+    uid: 9898
   richard.howard:
     full_name: 'Richard Howard (PW)'
     uid: 9897
