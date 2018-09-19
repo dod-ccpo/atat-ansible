@@ -1,10 +1,10 @@
 ---
-- name: Ensure all base system packages are up to date
-  apt:
-    name: '*'
-    state: latest
-    update_cache: yes
-    force_apt_get: True
+#- name: Ensure all base system packages are up to date
+#  apt:
+#    name: '*'
+#    state: latest
+#    update_cache: yes
+#    force_apt_get: True
 
 - name: Install default utility packages
   apt: name={{ item }} state=latest force_apt_get=True
